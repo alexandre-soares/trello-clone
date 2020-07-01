@@ -1,7 +1,19 @@
 <template>
     <div class="task-view">
         <div class="task-view__task">
-            {{ task.name }}
+            <input
+                type="text"
+                class="task-view__input-name"
+                :value="task.name"
+                @change="updateTaskProperty($event, 'name')"
+                @keyup.enter="updateTaskProperty($event, 'name')"
+            />
+
+            <textarea
+                :value="task.description"
+                class="task-view__description"
+                @change="updateTaskProperty($event, 'description')"
+            ></textarea>
         </div>
     </div>
 </template>
@@ -13,6 +25,16 @@ export default {
         ...mapGetters(['getTask']),
         task() {
             return this.getTask(this.$route.params.id)
+        }
+    },
+    methods: {
+        updateTaskProperty(e, key) {
+            this.$store.commit('UPDATE_TASK', {
+                task: this.task,
+                key,
+                value: e.target.value
+            })
+            this.$router.push({ name: 'board' })
         }
     }
 }
@@ -39,10 +61,27 @@ export default {
     padding: 3rem;
 
     &__task {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        cursor: pointer;
+        width: 100%;
+    }
+
+    &__description {
+        position: relative;
+        background: transparent;
+        padding: 0.5rem;
+        border: none;
+        margin-top: 1rem;
+        width: 90%;
+        font-family: 'Roboto';
+        line-height: 1.5;
+    }
+
+    &__input-name {
+        padding: 0.5rem;
+        border: none;
+        display: block;
+        margin-right: 2rem;
+        font-weight: 600;
+        width: 90%;
     }
 }
 </style>

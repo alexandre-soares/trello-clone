@@ -16,16 +16,23 @@
                         :key="$taskIndex"
                         @click="goToTask(task)"
                     >
-                        <span class="w-full flex-no-shrink font-bold">
+                        <span class="task__name">
                             {{ task.name }}
                         </span>
                         <p
                             v-if="task.description"
-                            class="w-full flex-no-shrink mt-1 text-sm"
+                            class="task__name--description"
                         >
                             {{ task.description }}
                         </p>
                     </div>
+
+                    <input
+                        type="text"
+                        class="task-input"
+                        placeholder="+ Enter new task"
+                        @keyup.enter="createTask($event, column.tasks)"
+                    />
                 </div>
             </div>
         </div>
@@ -52,12 +59,19 @@ export default {
         },
         close() {
             this.$router.push({ name: 'board' })
+        },
+        createTask(e, tasks) {
+            this.$store.commit('CREATE_TASK', {
+                tasks,
+                name: e.target.value
+            })
+            e.target.value = ''
         }
     }
 }
 </script>
 
-<style lang="css">
+<style lang="scss" scoped>
 .tasks {
     display: flex;
 }
@@ -77,6 +91,16 @@ export default {
     color: #3d4852;
     cursor: pointer;
     text-decoration: none;
+
+    &__name {
+        font-weight: 600;
+        flex-shrink: unset;
+        width: 100%;
+
+        &--description {
+            font-size: small;
+        }
+    }
 }
 
 .column {
@@ -103,5 +127,13 @@ export default {
     bottom: 0;
     left: 0;
     background: rgba(0, 0, 0, 0.5);
+}
+
+.task-input {
+    display: block;
+    padding: 1rem;
+    width: 90%;
+    background: transparent;
+    border: none;
 }
 </style>
