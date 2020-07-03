@@ -9,17 +9,19 @@
         fromColumnIndex: columnIndex,
         fromTaskIndex: taskIndex
       }"
-      @click="goToTask(task)"
+    
     >
-      <span class="w-full flex-no-shrink font-bold">
+    <div @click="goToTask(task)">
+      <span class="task__title">
         {{ task.name }}
       </span>
       <p
         v-if="task.description"
-        class="task__new-task"
+        class="task__description"
       >
         {{ task.description }}
       </p>
+    </div>
     </AppDrag>
   </AppDrop>
 </template>
@@ -55,6 +57,8 @@ export default {
             e.dataTransfer.setData('type', 'task')
         },
         goToTask(task) {
+            console.log('here')
+
             this.$router.push({ name: 'task', params: { id: task.id } })
         }
     }
@@ -78,18 +82,18 @@ export default {
     cursor: pointer;
     text-decoration: none;
 
+    &__title {
+        font-weight: 600;
+    }
+
+    &__description {
+        font-size: small;
+    }
+
     &__name {
         font-weight: 600;
         flex-shrink: unset;
         width: 100%;
-
-        &--description {
-            font-size: small;
-        }
-
-        &__new-task {
-            border: none;
-        }
     }
 }
 </style>

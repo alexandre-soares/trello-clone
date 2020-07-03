@@ -1,5 +1,6 @@
 <template>
     <div id="app">
+        <h1>Trello Clone</h1>
         <router-view />
     </div>
 </template>
@@ -22,6 +23,10 @@ html {
     text-align: center;
     color: #2c3e50;
     height: 100%;
+    padding: 1rem;
+    background-color: #38a89d;
+    height: 100%;
+    overflow: auto;
 }
 
 .container {
