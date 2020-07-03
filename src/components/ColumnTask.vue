@@ -11,10 +11,13 @@
       }"
     
     >
-    <div @click="goToTask(task)">
-      <span class="task__title">
-        {{ task.name }}
-      </span>
+    <div @click="goToTask(task)" class="full-width">
+      <div class="task__header">
+        <span class="task__title">
+          {{ task.name }}
+        </span>
+      </div>
+
       <p
         v-if="task.description"
         class="task__description"
@@ -81,6 +84,11 @@ export default {
     color: #3d4852;
     cursor: pointer;
     text-decoration: none;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+    }
 
     &__title {
         font-weight: 600;

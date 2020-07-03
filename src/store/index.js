@@ -14,16 +14,16 @@ export default new Vuex.Store({
     },
     getters: {
         getTask(state) {
-            console.log('getTask function launched')
-            console.log('colums' + state.board.columns)
+            // console.log('getTask function launched')
+            // console.log('colums' + state.board.columns)
 
             return id => {
                 for (const column of state.board.columns) {
                     for (const task of column.tasks) {
-                        console.log(task.id)
+                        // console.log(task.id)
 
                         if (task.id === id) {
-                            console.log('task' + task)
+                            // console.log('task' + task)
 
                             return task
                         }
@@ -40,11 +40,42 @@ export default new Vuex.Store({
                 description: ''
             })
         },
+        DELETE_TASK(state, { taskId }) {
+            // console.log(taskId)
+
+            for (const column of state.board.columns) {
+                // console.log(column.tasks)
+                let i = 0
+                for (const task of column.tasks) {
+                    // console.log('index is now ' + i)
+                    if (task.id === taskId) {
+                        column.tasks.splice(i, 1)
+                        break
+                    }
+                    i = i + 1
+                }
+            }
+        },
         CREATE_COLUMN(state, { name }) {
             state.board.columns.push({
                 name,
                 tasks: []
             })
+        },
+        DELETE_COLUMN(state, { columnName }) {
+            // console.log('column name is ')
+            // console.log(columnName)
+
+            let i = 0
+
+            for (const column of state.board.columns) {
+                if (column.name === columnName) {
+                    console.log(i)
+                    state.board.columns.splice(i, 1)
+                    break
+                }
+                i++
+            }
         },
         UPDATE_TASK(state, { task, key, value }) {
             Vue.set(task, key, value)

@@ -1,13 +1,19 @@
 <template>
     <div class="task-view">
         <div class="task-view__task">
-            <input
-                type="text"
-                class="task-view__input-name"
-                :value="task.name"
-                @change="updateTaskProperty($event, 'name')"
-                @keyup.enter="updateTaskProperty($event, 'name')"
-            />
+            <div class="task-view__header">
+                <input
+                    type="text"
+                    class="task-view__input-name"
+                    :value="task.name"
+                    @change="updateTaskProperty($event, 'name')"
+                    @keyup.enter="updateTaskProperty($event, 'name')"
+                />
+                <div @click="deleteTask($event, task.id)">
+                    <BaseIcon name="delete" class="delete-icon"></BaseIcon>
+                </div>
+            </div>
+
 
             <textarea
                 :value="task.description"
@@ -35,6 +41,12 @@ export default {
                 value: e.target.value
             })
             this.$router.push({ name: 'board' })
+        },
+        deleteTask(e, taskId) {
+            this.$store.commit('DELETE_TASK', {
+                taskId
+            })
+            this.$router.push({ name: 'board' })
         }
     }
 }
@@ -59,6 +71,11 @@ export default {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
     width: 60%;
     padding: 3rem;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+    }
 
     &__task {
         width: 100%;

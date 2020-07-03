@@ -5,15 +5,11 @@
     </div>
 </template>
 
-<style>
+<style lang="scss">
 body,
 html {
     height: 100%;
     margin: 0;
-}
-
-html {
-    /* font-size: 62,5%; */
 }
 
 #app {
@@ -36,5 +32,17 @@ html {
 
 .app-title {
     color: white;
+}
+
+// Utilities
+
+.full-width {
+    width: 100%;
+}
+
+// Style for icons
+
+.delete-icon {
+    color: red;
 }
 </style>

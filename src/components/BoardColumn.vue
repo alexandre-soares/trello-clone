@@ -11,6 +11,10 @@
     >
       <div class="column__title">
         {{ column.name }}
+        <div @click="deleteColumn($event, column.name)">
+          <BaseIcon name="delete" class="delete-icon"></BaseIcon>
+        </div>
+
       </div>
       <div class="list-reset">
         <ColumnTask
@@ -55,6 +59,11 @@ export default {
             })
             e.target.value = ''
         },
+        deleteColumn(e, columnName) {
+            this.$store.commit('DELETE_COLUMN', {
+                columnName
+            })
+        },
         pickupColumn(e, fromColumnIndex) {
             e.dataTransfer.effectAllowed = 'move'
             e.dataTransfer.dropEffect = 'move'
@@ -81,9 +90,10 @@ export default {
         font-size: large;
         font-weight: 700;
         margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
     }
 }
-
 .task-input {
     display: block;
     padding: 1rem;
