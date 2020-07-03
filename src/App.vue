@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <h1>Trello Clone</h1>
+        <h1 class="app-title">Trello Clone</h1>
         <router-view />
     </div>
 </template>
@@ -32,5 +32,9 @@ html {
 .container {
     margin-left: auto;
     margin-right: auto;
+}
+
+.app-title {
+    color: white;
 }
 </style>
