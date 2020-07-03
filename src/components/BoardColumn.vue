@@ -9,7 +9,7 @@
         fromColumnIndex: columnIndex
       }"
     >
-      <div class="flex items-center mb-2 font-bold">
+      <div class="column__title">
         {{ column.name }}
       </div>
       <div class="list-reset">
@@ -76,6 +76,12 @@ export default {
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
     border-radius: 0.25rem;
     cursor: pointer;
+
+    &__title {
+        font-size: large;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
 }
 
 .task-input {
