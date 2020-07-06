@@ -1,40 +1,42 @@
 <template>
+
   <AppDrop
     @drop="moveTaskOrColumn"
-  >
-    <AppDrag
-      class="column"
-      :transferData="{
-        type: 'column',
-        fromColumnIndex: columnIndex
-      }"
     >
-      <div class="column__title">
-        {{ column.name }}
-        <div @click="deleteColumn($event, column.name)">
-          <BaseIcon name="delete" class="delete-icon"></BaseIcon>
-        </div>
+        <AppDrag
+        class="column"
+        :transferData="{
+            type: 'column',
+            fromColumnIndex: columnIndex
+        }"
+            >
+            <div class="column__title">
+                {{ column.name }}
+                <div @click="deleteColumn($event, column.name)">
+                <BaseIcon name="delete" class="delete-icon"></BaseIcon>
+                </div>
 
-      </div>
-      <div class="list-reset">
-        <ColumnTask
-          v-for="(task, $taskIndex) of column.tasks"
-          :key="$taskIndex"
-          :task="task"
-          :taskIndex="$taskIndex"
-          :column="column"
-          :columnIndex="columnIndex"
-          :board="board"
-        />
+            </div>
+            <div class="list-reset">
+                <ColumnTask
+                v-for="(task, $taskIndex) of column.tasks"
+                :key="$taskIndex"
+                :task="task"
+                :taskIndex="$taskIndex"
+                :column="column"
+                :columnIndex="columnIndex"
+                :board="board"
+                />
 
-        <input
-          type="text"
-          class="task-input"
-          placeholder="+ Enter new task"
-          @keyup.enter="createTask($event, column.tasks)"
-        />
-      </div>
-    </AppDrag>
+                <input
+                type="text"
+                class="task-input"
+                placeholder="+ Enter new task"
+                @keyup.enter="createTask($event, column.tasks)"
+                />
+            </div>
+
+        </AppDrag>
   </AppDrop>
 </template>
 

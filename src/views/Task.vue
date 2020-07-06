@@ -57,7 +57,7 @@ export default {
     position: relative;
     display: flex;
     flex-direction: row;
-    background-color: #fff;
+    background-color: #dae1e7;
     top: 0;
     right: 0;
     bottom: 0;
@@ -99,6 +99,7 @@ export default {
         margin-right: 2rem;
         font-weight: 600;
         width: 90%;
+        border-radius: 0.25rem;
     }
 }
 </style>

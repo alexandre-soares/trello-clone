@@ -82,9 +82,15 @@ export default {
 
 .new-column-input {
     display: flex;
-    padding: 2rem;
-    margin-right: 2rem;
     background: transparent;
     border: none;
+    background-color: #dae1e7;
+    min-width: 350px;
+    padding: 0.5rem;
+    margin-right: 1rem;
+    text-align: left;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 0.25rem;
+    cursor: pointer;
 }
 </style>
