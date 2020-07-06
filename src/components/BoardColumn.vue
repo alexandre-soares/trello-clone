@@ -1,36 +1,42 @@
 <template>
+
   <AppDrop
     @drop="moveTaskOrColumn"
-  >
-    <AppDrag
-      class="column"
-      :transferData="{
-        type: 'column',
-        fromColumnIndex: columnIndex
-      }"
     >
-      <div class="column__title">
-        {{ column.name }}
-      </div>
-      <div class="list-reset">
-        <ColumnTask
-          v-for="(task, $taskIndex) of column.tasks"
-          :key="$taskIndex"
-          :task="task"
-          :taskIndex="$taskIndex"
-          :column="column"
-          :columnIndex="columnIndex"
-          :board="board"
-        />
+        <AppDrag
+        class="column"
+        :transferData="{
+            type: 'column',
+            fromColumnIndex: columnIndex
+        }"
+            >
+            <div class="column__title">
+                {{ column.name }}
+                <div @click="deleteColumn($event, column.name)">
+                <BaseIcon name="delete" class="delete-icon"></BaseIcon>
+                </div>
 
-        <input
-          type="text"
-          class="task-input"
-          placeholder="+ Enter new task"
-          @keyup.enter="createTask($event, column.tasks)"
-        />
-      </div>
-    </AppDrag>
+            </div>
+            <div class="list-reset">
+                <ColumnTask
+                v-for="(task, $taskIndex) of column.tasks"
+                :key="$taskIndex"
+                :task="task"
+                :taskIndex="$taskIndex"
+                :column="column"
+                :columnIndex="columnIndex"
+                :board="board"
+                />
+
+                <input
+                type="text"
+                class="task-input"
+                placeholder="+ Enter new task"
+                @keyup.enter="createTask($event, column.tasks)"
+                />
+            </div>
+
+        </AppDrag>
   </AppDrop>
 </template>
 
@@ -54,6 +60,11 @@ export default {
                 name: e.target.value
             })
             e.target.value = ''
+        },
+        deleteColumn(e, columnName) {
+            this.$store.commit('DELETE_COLUMN', {
+                columnName
+            })
         },
         pickupColumn(e, fromColumnIndex) {
             e.dataTransfer.effectAllowed = 'move'
@@ -81,9 +92,10 @@ export default {
         font-size: large;
         font-weight: 700;
         margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
     }
 }
-
 .task-input {
     display: block;
     padding: 1rem;
